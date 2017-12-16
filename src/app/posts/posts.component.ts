@@ -9,13 +9,19 @@ import {Http} from '@angular/http';
 })
 export class PostsComponent  {
   posts: any[];
-
-  website = 'https://jsonplaceholder.typicode.com/posts';
-  constructor(http: Http) {
-    http.get(this.website)
+  private url = 'https://jsonplaceholder.typicode.com/posts';
+  constructor(private http: Http) {
+    this.http.get(this.url)
       .subscribe(response => {
         // console.log(response.json());
         this.posts = response.json();
+      });
+  }
+  createPost(input: HTMLInputElement) {
+    const post = {title : input.value};
+    this.http.post(this.url, JSON.stringify(post))
+      .subscribe(response => {
+        console.log(response.json());
       });
   }
 
