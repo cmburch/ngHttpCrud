@@ -8,12 +8,14 @@ import {Http} from '@angular/http';
   styleUrls: ['./posts.component.css']
 })
 export class PostsComponent  {
+  posts: any[];
 
   website = 'https://jsonplaceholder.typicode.com/posts';
   constructor(http: Http) {
     http.get(this.website)
       .subscribe(response => {
-        console.log(response);
+        // console.log(response.json());
+        this.posts = response.json();
       });
   }
 
