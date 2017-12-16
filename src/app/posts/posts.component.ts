@@ -33,6 +33,13 @@ export class PostsComponent  {
         console.log(response.json());
       });
   }
+  deletePost(post) {
+    this.http.delete(this.url + '/' + post.id)
+      .subscribe(response => {
+        const index = this.posts.indexOf(post);
+        this.posts.splice(index, 1);
+      });
+  }
 
 
 }
